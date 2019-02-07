@@ -1,0 +1,36 @@
+#results li.pass { color: green; }
+#results li.fail { color: red; }
+
+.wrapper-ui {
+	padding: 10px 10px;
+}
+
+.preview-ui {
+	padding: 10px 10px;
+}
+
+.preview-ui.hide {
+	display: none;
+}
+.form-ui.hide {
+	display: none;
+}
+
+.form-ui {
+	padding: 10px 10px;
+}
+
+
+.form-ui input[type=text], input[type=email], .form-ui textarea{
+	width: 100%;
+	margin-bottom: 10px; 
+}
+
+.cancel-ui {
+	cursor: pointer;
+}
+
+.form-ui form label span, .form-ui form p span {
+	color: red;
+}
+
