@@ -3,27 +3,39 @@
 function App() {
     this.run = function (event) {
         event.preventDefault();
-        this.getData(function (data) {
-            document.getElementsById('data').innerHTML += data[0].sign;
-            console.log(data[0].sign)
-        });
+        getData();
+        console.log(responseData);
 
+    };
+
+    var myRequest = null;
+    var responseData = null;
+
+    function getData() {
+        myRequest = new XMLHttpRequest();
+        myRequest.onreadystatechange = getResponse;
+        myRequest.open('GET', 'getData.php', true);
+        myRequest.setRequestHeader('Content-Type', 'application/json');
+        myRequest.send();
     }
 
-    this.getData = function (success) {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                try {
-                    success(JSON.parse(this.responseText));
-                } catch (err) {
-                    console.log(err.message + " in " + xhr.responseText);
-                    return;
+    function getResponse() {
+        try {
+            if (myRequest.readyState == XMLHttpRequest.DONE) {
+                switch (myRequest.status) {
+                    case 500:
+                        break;
+                    case 404:
+                        break;
+                    case 200:
+                        responseData = JSON.parse(myRequest.responseText);
+                        break;
                 }
             }
-        };
-        xhr.open('GET', 'getData.php', true);
-        xhr.send();
+        }
+        catch (ex) {
+            console.log('Ajax error: ' + ex.Description);
+        }
     }
 
 

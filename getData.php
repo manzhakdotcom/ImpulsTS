@@ -1,11 +1,6 @@
 <?php
-$config = [
-    'host' => 'localhost',
-    'driver' => 'mysql',
-    'dbname' => 'params',
-    'user' => 'root',
-    'password' => ''
-];
+$config = require __DIR__ . '/config.php';
+
 $pdo = new PDO(
     $config['driver'] . 
     ':host=' . 
