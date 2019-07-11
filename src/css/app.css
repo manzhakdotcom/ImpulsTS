@@ -1,0 +1,8 @@
+body {
+    padding: 30px 30px;
+}
+a.button {
+    padding: 10px 10px;
+    background-color: brown;
+    color: white;
+}
