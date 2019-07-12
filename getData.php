@@ -14,4 +14,5 @@ $pdo = new PDO(
 $sth = $pdo->prepare('select * from kp');
 $sth->execute();
 $data = $sth->fetchAll(PDO::FETCH_ASSOC);
+header('Content-Type:application/json;charset=UTF-8');
 echo json_encode($data);

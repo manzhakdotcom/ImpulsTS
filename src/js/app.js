@@ -1,34 +1,42 @@
 'use strict';
 
 function App() {
+    var _responseData = '';
+    var _myRequest = '';
     this.run = function (event) {
         event.preventDefault();
-        getData();
-        console.log(responseData);
-
+        _getData();
+        this.getResponseData();
     };
+    
 
-    var myRequest = null;
-    var responseData = null;
-
-    function getData() {
-        myRequest = new XMLHttpRequest();
-        myRequest.onreadystatechange = getResponse;
-        myRequest.open('GET', 'getData.php', true);
-        myRequest.setRequestHeader('Content-Type', 'application/json');
-        myRequest.send();
+    function _getData() {
+        _myRequest = new XMLHttpRequest();
+        _myRequest.onreadystatechange = _getResponse;
+        _myRequest.open('GET', 'getData.php', true);
+        _myRequest.setRequestHeader('Content-Type', 'text/pain;charset=UTF-8');
+        _myRequest.send(null); //null так как get запрос
     }
 
-    function getResponse() {
+    this.getResponseData = function() {
+        console.log(_responseData);
+    }
+
+    function _getResponse() {
         try {
-            if (myRequest.readyState == XMLHttpRequest.DONE) {
-                switch (myRequest.status) {
+            if (_myRequest.readyState == XMLHttpRequest.DONE) {
+                switch (_myRequest.status) {
                     case 500:
                         break;
                     case 404:
                         break;
                     case 200:
-                        responseData = JSON.parse(myRequest.responseText);
+                        var type =  _myRequest.getResponseHeader('Content-Type');
+                        console.log(type);
+                        if(type.match('/json')) {
+                            _responseData = JSON.parse(_myRequest.responseText);
+                        }
+                        
                         break;
                 }
             }
@@ -37,8 +45,6 @@ function App() {
             console.log('Ajax error: ' + ex.Description);
         }
     }
-
-
 }
 
 var app = new App();
