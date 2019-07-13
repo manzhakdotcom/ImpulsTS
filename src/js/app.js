@@ -1,50 +1,33 @@
 'use strict';
 
 function App() {
-    var _responseData = '';
-    var _myRequest = '';
+    this.data = '';
     this.run = function (event) {
         event.preventDefault();
-        _getData();
-        this.getResponseData();
+        _getData(_getResponse);
     };
-    
 
-    function _getData() {
-        _myRequest = new XMLHttpRequest();
-        _myRequest.onreadystatechange = _getResponse;
-        _myRequest.open('GET', 'getData.php', true);
-        _myRequest.setRequestHeader('Content-Type', 'text/pain;charset=UTF-8');
-        _myRequest.send(null); //null так как get запрос
-    }
+    var _getResponse = function(data) {
+        console.log(data);
+        this.data = data;
+        console.log(this.data);
+    }.bind(this);
 
-    this.getResponseData = function() {
-        console.log(_responseData);
-    }
+    var _getData = function(callback) {
+        var _myRequest = new XMLHttpRequest();
+        _myRequest.onreadystatechange = function () {
 
-    function _getResponse() {
-        try {
-            if (_myRequest.readyState == XMLHttpRequest.DONE) {
-                switch (_myRequest.status) {
-                    case 500:
-                        break;
-                    case 404:
-                        break;
-                    case 200:
-                        var type =  _myRequest.getResponseHeader('Content-Type');
-                        console.log(type);
-                        if(type.match('/json')) {
-                            _responseData = JSON.parse(_myRequest.responseText);
-                        }
-                        
-                        break;
+            if (_myRequest.readyState === XMLHttpRequest.DONE && _myRequest.status === 200) {
+                var type = _myRequest.getResponseHeader('Content-Type');
+                if (type.match('/json')) {
+                    callback(JSON.parse(_myRequest.responseText));
                 }
             }
         }
-        catch (ex) {
-            console.log('Ajax error: ' + ex.Description);
-        }
+        _myRequest.open('GET', 'getData.php', true);
+        _myRequest.send(null); //null так как get запрос
     }
+
 }
 
 var app = new App();
