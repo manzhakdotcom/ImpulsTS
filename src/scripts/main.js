@@ -1,9 +1,12 @@
 'use strict';
 
+var app = new App();
+
 function App() {
     this.data = '';
     this.run = function (event) {
         event.preventDefault();
+        alert('hi');
         _getData(_getResponse);
     };
 
@@ -23,14 +26,15 @@ function App() {
                     callback(JSON.parse(_myRequest.responseText));
                 }
             }
-        }
-        _myRequest.open('GET', 'getData.php', true);
+        };
+        _myRequest.open('GET', 'php/getData.php', true);
+
         _myRequest.send(null); //null так как get запрос
     }
 
 }
 
-var app = new App();
+
 
 
 

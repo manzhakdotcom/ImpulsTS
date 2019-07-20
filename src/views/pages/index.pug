@@ -1,0 +1,10 @@
+extends ../main.layout.pug
+
+block variables
+    - var title = 'Главная'
+
+block content
+    a(href="/name" onclick="app.run(event);") Кнопка
+
+block scripts
+    script(src='dist/js/main.min.js')
