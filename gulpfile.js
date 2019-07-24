@@ -21,7 +21,7 @@ const paths = {
         dest: './dist/css',
     },
     scripts: {
-        src: './src/scripts/*.js',
+        src: ['./src/scripts/popup.js','./src/scripts/main.js'],
         dest: './dist/js',
     }
 };

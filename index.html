@@ -9,7 +9,11 @@
   </head>
   <body>
     <div class="wrapper">
-      <div class="maincontent"><a href="/name" onclick="app.run(event);">Кнопка</a>
+      <div class="maincontent">
+        <button data-popup-modal="modal1">Кнопка#1</button>
+        <button data-popup-modal="modal2">Кнопка#2</button>
+        <div class="modals" id="modal1">Модальное окно #1.<span class="close">Закрыть</span></div>
+        <div class="modals" id="modal2">Модальное окно #2.<span class="close">Закрыть</span></div>
       </div>
       <footer class="footer">
         <h2>Copyright &copy;</h2>

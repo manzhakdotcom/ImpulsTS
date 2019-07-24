@@ -4,7 +4,11 @@ block variables
     - var title = 'Главная'
 
 block content
-    a(href="/name" onclick="app.run(event);") Кнопка
-
+    button(data-popup-modal='modal1') Кнопка#1
+    button(data-popup-modal='modal2') Кнопка#2
+    div.modals#modal1 Модальное окно #1.
+        span.close Закрыть
+    div.modals#modal2 Модальное окно #2.
+        span.close Закрыть
 block scripts
     script(src='dist/js/main.min.js')
