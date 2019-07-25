@@ -2,14 +2,22 @@ var Popup = function(){
     var popup = {},
         settings = {
             button: '#modal-trigger-default',
-            content: '#modal-content-defult',
+            content: '#modal-content-default',
             maxWidth: 600,
             minWidth: 280,
             className: 'fade-and-drop',
         },
         modal,
         closeButton,
-        overlay;
+        overlay,
+        transitionEnd = transitionSelect();
+
+    function transitionSelect() {
+        var el = document.createElement("div");
+        if (el.style.WebkitTransition) return "webkitTransitionEnd";
+        if (el.style.OTransition) return "oTransitionEnd";
+        return 'transitionend';
+    }
 
     function extend() {
         for (var i = 1; i < arguments.length; i++) {
@@ -27,7 +35,14 @@ var Popup = function(){
     }
 
     function close() {
-        console.log('close');
+        modal.className = modal.className.replace(" scotch-open", "");
+        overlay.className = overlay.className.replace(" scotch-open", "");
+        modal.addEventListener(transitionEnd, function() {
+            modal.parentNode.removeChild(modal);
+        });
+        overlay.addEventListener(transitionEnd, function() {
+            if(overlay.parentNode) overlay.parentNode.removeChild(overlay);
+        });
     }
 
     function handlerModel(){
@@ -76,7 +91,7 @@ var Popup = function(){
         handlerModel();
         window.getComputedStyle(modal).height;
         modal.className = modal.className + (modal.offsetHeight > window.innerHeight ? ' scotch-open scotch-anchored' : ' scotch-open');
-        overlay.className = overlay.className + ' scatch-open';
+        overlay.className = overlay.className + ' scotch-open';
 
     }
 
