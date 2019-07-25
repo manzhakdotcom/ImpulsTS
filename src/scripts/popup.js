@@ -1,8 +1,15 @@
 var Popup = function(){
-    var popup = {};
-    var settings = {
-        className: 'modal-defult',
-    };
+    var popup = {},
+        settings = {
+            button: '#modal-trigger-default',
+            content: '#modal-content-defult',
+            maxWidth: 600,
+            minWidth: 280,
+            className: 'fade-and-drop',
+        },
+        modal,
+        closeButton,
+        overlay;
 
     function extend() {
         for (var i = 1; i < arguments.length; i++) {
@@ -16,23 +23,80 @@ var Popup = function(){
     }
 
     function $(el) {
-        return document.querySelectorAll(el);
+        return document.getElementById(el);
     }
 
+    function close() {
+        console.log('close');
+    }
 
+    function handlerModel(){
+        closeButton.addEventListener('click', close);
+        overlay.addEventListener('click', close);
+    }
+
+    function handlerButton(){
+        var button = $(settings.button);
+        button.addEventListener('click', open);
+    }
+
+    function buildModel() {
+        var content = $(settings.content).innerHTML,
+            contentHolder,
+            docFrag;
+        
+        docFrag = document.createDocumentFragment();
+        
+        modal = document.createElement('div');
+        modal.className = 'scotch-modal ' + settings.className;
+        modal.style.minWidth = settings.minWidth + 'px';
+        modal.style.maxWidth = settings.maxWidth + 'px';
+
+        closeButton = document.createElement('button');
+        closeButton.className = 'scotch-close close-button';
+        closeButton.innerHTML = '&times;';
+        modal.appendChild(closeButton);
+
+        overlay = document.createElement("div");
+        overlay.className = "scotch-overlay " + settings.className;
+        docFrag.appendChild(overlay);
+
+        contentHolder = document.createElement("div");
+        contentHolder.className = "scotch-content";
+        contentHolder.innerHTML = content;
+        modal.appendChild(contentHolder);
+
+        docFrag.appendChild(modal);
+
+        document.body.appendChild(docFrag);
+    }
+
+    function open() {
+        buildModel();
+        handlerModel();
+        window.getComputedStyle(modal).height;
+        modal.className = modal.className + (modal.offsetHeight > window.innerHeight ? ' scotch-open scotch-anchored' : ' scotch-open');
+        overlay.className = overlay.className + ' scatch-open';
+
+    }
 
     popup.init = function(opt){
 
-        var options = extend({}, settings, opt);
-        console.log(options);
+        settings = extend({}, settings, opt);
+        console.log(settings);
 
+        handlerButton();
+
+        /*
         var modals = $(options.className);
         console.log(modals);
 
         Array.prototype.forEach.call(modals, function(el) {
             el.style.display = 'none';
         })
+        */
 
     };
+
     return popup;
 };

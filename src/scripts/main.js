@@ -5,7 +5,8 @@ window.App = {};
 window.App.popup = Popup();
 
 window.App.popup.init({
-    className: '.modals',
+    button: 'modal-trigger',
+    content: 'modal-content',
 });
 
 

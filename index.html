@@ -10,15 +10,18 @@
   <body>
     <div class="wrapper">
       <div class="maincontent">
-        <button data-popup-modal="modal1">Кнопка#1</button>
-        <button data-popup-modal="modal2">Кнопка#2</button>
-        <div class="modals" id="modal1">Модальное окно #1.<span class="close">Закрыть</span></div>
-        <div class="modals" id="modal2">Модальное окно #2.<span class="close">Закрыть</span></div>
+        <button id="modal-trigger">Кнопка</button>
+        <div id="modal-content" style="display:none;"> 
+          <h3>Заголовок</h3>
+          <p>Содержимое модального окна.</p>
+          <input>
+        </div>
       </div>
       <footer class="footer">
         <h2>Copyright &copy;</h2>
       </footer>
     </div>
-    <script src="dist/js/main.min.js"></script>
+    <script src="src/scripts/popup.js"></script>
+    <script src="src/scripts/main.js"></script>
   </body>
 </html>
