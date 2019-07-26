@@ -1,7 +1,5 @@
 'use strict';
 
-var app = new App();
-
 function App() {
     this.data = '';
     this.run = function (event) {
