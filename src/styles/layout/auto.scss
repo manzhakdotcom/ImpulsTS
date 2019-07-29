@@ -3,14 +3,14 @@
   font-size: 14px;
 }
 
-#autocomplete {
+#stations {
   border: 1px solid silver;
   outline: none;
   margin: 0;
   background: #fff;
 }
 
-#autocomplete_result {
+#stations_result {
   border: 1px solid silver;
   border-top: 0;
   position: absolute;
@@ -19,21 +19,21 @@
   background: #fff;
 }
 
-#autocomplete, #autocomplete_result {
+#stations, #stations_result {
   width: 200px;
   box-sizing: border-box;
 }
 
-#autocomplete, #autocomplete_result p {
+#stations, #stations_result p {
   padding: 4px;
   margin: 0;
   color: #000;
 }
 
-#autocomplete_result p:nth-child(2n+1) {
+#stations_result p:nth-child(2n+1) {
   background: #f6f6f6;
 }
 
-#autocomplete_result p:hover {
+#stations_result p:hover {
   background: #e5e5e5;
 }

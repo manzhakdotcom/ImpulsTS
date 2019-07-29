@@ -8,8 +8,9 @@ block content
     div#modal-content(style='display:none;') 
         h3 Заголовок
         p Содержимое модального окна.
-        input#autocomplete(type='text')
-        div#autocomplete_result(style='display:none')
+        select#stations(name='stations')
 block scripts
     script(src='src/scripts/popup.js')
+    script(src='src/scripts/select.js')
+    script(src='src/scripts/ajax.js')
     script(src='src/scripts/main.js')

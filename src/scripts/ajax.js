@@ -1,36 +1,56 @@
 'use strict';
 
-function App() {
-    this.data = '';
-    this.run = function (event) {
-        event.preventDefault();
-        alert('hi');
-        _getData(_getResponse);
-    };
+var Ajax = function() {
+    var settings = {
+            url: 'php/getData.php',
+            table: 'kp',
+            param: '',
+        };
 
-    var _getResponse = function(data) {
-        console.log(data);
-        this.data = data;
-        console.log(this.data);
-    }.bind(this);
-
-    var _getData = function(callback) {
-        var _myRequest = new XMLHttpRequest();
-        _myRequest.onreadystatechange = function () {
-
-            if (_myRequest.readyState === XMLHttpRequest.DONE && _myRequest.status === 200) {
-                var type = _myRequest.getResponseHeader('Content-Type');
-                if (type.match('/json')) {
-                    callback(JSON.parse(_myRequest.responseText));
+    function extend() {
+        for (var i = 1; i < arguments.length; i++) {
+            for (var key in arguments[i]) {
+                if (arguments[i].hasOwnProperty(key)) {
+                    arguments[0][key] = arguments[i][key]
                 }
             }
-        };
-        _myRequest.open('GET', 'php/getData.php', true);
-
-        _myRequest.send(null); //null так как get запрос
+        }
+        return arguments[0]
     }
 
-}
+    function getData(opts, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', opts.url + '?table=' + opts.table + '&param=' + opts.param);
+        xhr.send(null);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                callback.apply(xhr);
+            }
+        };
+         //null так как get запрос
+    }
+
+
+
+
+    return {
+        init: function(opts) {
+            settings = extend({}, settings, opts);
+            getData(settings, function() {
+                var data = JSON.parse(this.responseText);
+                console.log(data);
+                window.App.select.create(data);
+
+            });
+            var select = document.querySelectorAll('.stations')[0];
+            select.addEventListener('change', function() {
+                alert('hi');
+            });
+            console.log(select);
+        },
+    };
+
+};
 
 
 

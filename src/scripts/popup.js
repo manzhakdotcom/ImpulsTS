@@ -53,6 +53,7 @@ var Popup = function(){
     function handlerButton(){
         var button = $(settings.button);
         button.addEventListener('click', open);
+
     }
 
     function buildModel() {
