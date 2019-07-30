@@ -4,13 +4,9 @@ block variables
     - var title = 'Главная'
 
 block content
-    button#modal-trigger Кнопка
-    div#modal-content(style='display:none;') 
-        h3 Заголовок
-        p Содержимое модального окна.
-        select#stations(name='stations')
+    button#modal-button Кнопка
 block scripts
     script(src='src/scripts/popup.js')
     script(src='src/scripts/select.js')
-    script(src='src/scripts/ajax.js')
+    script(src='src/scripts/stations.js')
     script(src='src/scripts/main.js')

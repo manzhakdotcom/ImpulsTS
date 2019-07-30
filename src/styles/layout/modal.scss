@@ -1,4 +1,10 @@
 /* Modal Base CSS */
+.result {
+  height: 400px;
+  overflow:scroll;
+}
+
+
 .scotch-overlay
 {
     position: fixed;
@@ -47,6 +53,7 @@
     border-radius: 2px;
     border: 1px solid #455a64;
     background: #fff;
+
 }
 
 

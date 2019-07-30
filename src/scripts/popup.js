@@ -57,8 +57,7 @@ var Popup = function(){
     }
 
     function buildModel() {
-        var content = $(settings.content).innerHTML,
-            contentHolder,
+        var contentHolder,
             docFrag;
         
         docFrag = document.createDocumentFragment();
@@ -79,7 +78,7 @@ var Popup = function(){
 
         contentHolder = document.createElement("div");
         contentHolder.className = "scotch-content";
-        contentHolder.innerHTML = content;
+        contentHolder.appendChild(createModal());
         modal.appendChild(contentHolder);
 
         docFrag.appendChild(modal);
@@ -93,26 +92,44 @@ var Popup = function(){
         window.getComputedStyle(modal).height;
         modal.className = modal.className + (modal.offsetHeight > window.innerHeight ? ' scotch-open scotch-anchored' : ' scotch-open');
         overlay.className = overlay.className + ' scotch-open';
+        window.App.select.createElement();
+    }
+
+    function createModal() {
+        var frag = document.createDocumentFragment();
+        var div = document.createElement('div');
+        div.className = 'modal-wrapper';
+        var h4 = document.createElement('h4');
+        h4.innerText = 'Title';
+        div.appendChild(h4);
+        var p = document.createElement('p');
+        p.innerText = 'Content';
+        div.appendChild(p);
+        var select = document.createElement('select');
+        div.appendChild(select);
+        var div_result = document.createElement('div');
+        div_result.className = 'result';
+        div.appendChild(div_result);
+        frag.appendChild(div);
+        return frag;
 
     }
 
-    popup.init = function(opt){
+    return {
+        init: function(opt){
+            settings = extend({}, settings, opt);
+            handlerButton();
 
-        settings = extend({}, settings, opt);
-        console.log(settings);
+            /*
+            var modals = $(options.className);
+            console.log(modals);
 
-        handlerButton();
+            Array.prototype.forEach.call(modals, function(el) {
+                el.style.display = 'none';
+            })
+            */
 
-        /*
-        var modals = $(options.className);
-        console.log(modals);
-
-        Array.prototype.forEach.call(modals, function(el) {
-            el.style.display = 'none';
-        })
-        */
-
+        }
     };
 
-    return popup;
 };

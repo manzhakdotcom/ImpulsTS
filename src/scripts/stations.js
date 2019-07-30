@@ -1,6 +1,6 @@
 'use strict';
 
-var Ajax = function() {
+var Stations = function() {
     var settings = {
             url: 'php/getData.php',
             table: 'kp',
