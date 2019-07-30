@@ -1,13 +1,17 @@
 'use strict';
-window.App = {};
+(function() {
 
-window.App.popup = Popup();
-window.App.select = Select();
+    window.App = {};
 
-window.App.popup.init({
-    button: 'modal-button',
-    content: 'modal-content',
-});
+    window.App.popup = Popup();
+    window.App.select = Select();
+
+    window.App.popup.init({
+        button: 'modal-button',
+        content: 'modal-content',
+    });
+
+})();
 
 
 

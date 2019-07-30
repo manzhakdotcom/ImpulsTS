@@ -15,8 +15,8 @@ $table = (isset($_GET['table']) && trim($_GET['table'] !== '')) ? $_GET['table']
 $param = (isset($_GET['param']) && trim($_GET['param'] !== '')) ? $_GET['param'] : '';
 
 if($param === '0') {
-    echo array();
-    return;
+    echo json_encode(array());
+    die();
 }
 
 

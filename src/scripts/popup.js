@@ -1,6 +1,5 @@
 var Popup = function(){
-    var popup = {},
-        settings = {
+    var settings = {
             button: '#modal-trigger-default',
             content: '#modal-content-default',
             maxWidth: 600,
@@ -119,15 +118,6 @@ var Popup = function(){
         init: function(opt){
             settings = extend({}, settings, opt);
             handlerButton();
-
-            /*
-            var modals = $(options.className);
-            console.log(modals);
-
-            Array.prototype.forEach.call(modals, function(el) {
-                el.style.display = 'none';
-            })
-            */
 
         }
     };

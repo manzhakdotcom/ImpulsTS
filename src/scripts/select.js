@@ -1,13 +1,5 @@
 var Select = function() {
-    var select;
 
-    function $(el) {
-        return document.getElementById(el);
-    }
-
-    function test() {
-        alert('hi');
-    }
 
     function ajax(opts, callback) {
         var xhr = new XMLHttpRequest();
@@ -21,7 +13,7 @@ var Select = function() {
     }
 
     return {
-        createElement: function(data) {
+        createElement: function() {
             ajax({
                 url: 'php/getData.php',
                 table: 'kp',
@@ -58,7 +50,6 @@ var Select = function() {
                         console.log(data);
                     });
                 });
-                console.log(select);
             });
         }
     }
