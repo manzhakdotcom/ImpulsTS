@@ -1,6 +1,5 @@
 var Select = function() {
 
-
     function ajax(opts, callback) {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', opts.url + '?table=' + opts.table + '&param=' + opts.param);
@@ -24,8 +23,10 @@ var Select = function() {
                 option_default.value = '0';
                 option_default.innerText = 'Выберите станцию';
                 select.appendChild(option_default);
-
                 var data = JSON.parse(this.responseText);
+                if(data.hasOwnProperty('table')) {
+                    alert(data.table);
+                }
                 data.forEach(function (item) {
                     var option = document.createElement('option');
                     option.value = item.id;
@@ -33,15 +34,17 @@ var Select = function() {
                     select.appendChild(option);
                 });
                 select.addEventListener('change', function(e) {
-                    console.log(e.target.value);
                     ajax({
                         url: 'php/getData.php',
                         table: 'ts',
                         param: e.target.value,
                     }, function(xhr) {
+                        var data = JSON.parse(this.responseText);
+                        if(data.hasOwnProperty('table')) {
+                            alert(data.table);
+                        }
                         var result = document.querySelectorAll('#result')[0];
                         result.innerHTML = '';
-                        var data = JSON.parse(this.responseText);
                         data.forEach(function (item) {
                             var div = document.createElement('div');
                             div.innerText = item.sign + ' - ' + item.dev_desc;
@@ -50,7 +53,6 @@ var Select = function() {
                             }
                             result.appendChild(div);
                         });
-                        console.log(data);
                     });
                 });
             });

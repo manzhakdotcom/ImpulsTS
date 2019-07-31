@@ -12,17 +12,14 @@ var Search = function(){
         // Declare variables
         var input, filter, i, txtValue, div;
         input = document.getElementById('search');
-        console.log(input);
         filter = input.value.toUpperCase();
         result = document.getElementById("result");
         div = result.getElementsByTagName('div');
-        console.log(div);
 
         // Loop through all list items, and hide those who don't match the search query
         for (i = 0; i < div.length; i++) {
             //a = div[i].getElementsByTagName("a")[0];
             txtValue = div[i].textContent || div[i].innerText;
-            console.log(txtValue);
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 div[i].style.display = "";
             } else {
@@ -33,7 +30,6 @@ var Search = function(){
 
     function listener() {
         var input = document.getElementById('search');
-        console.log(input);
         input.addEventListener('input', search);
 
     }
