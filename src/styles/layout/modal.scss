@@ -1,7 +1,8 @@
 /* Modal Base CSS */
-.result {
+#result {
   height: 400px;
-  overflow:scroll;
+  overflow-y: scroll;
+  margin-top: 10px;
 }
 
 
@@ -101,6 +102,11 @@
     background: #e74c3c;
 }
 
+.alarm {
+  color: darkgreen;
+  font-weight: bold;
+}
+
 .scotch-close:hover
 {
     background: #c0392b;
@@ -147,6 +153,8 @@
 
 .modal-wrapper input {
   border: 1px solid rgb(169, 169, 169);
+  margin-left: 5px;
+  padding-left: 5px;
 }
 
 .scotch-overlay.fade-and-drop.scotch-open

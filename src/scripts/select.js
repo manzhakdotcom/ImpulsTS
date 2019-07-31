@@ -39,12 +39,15 @@ var Select = function() {
                         table: 'ts',
                         param: e.target.value,
                     }, function(xhr) {
-                        var result = document.querySelectorAll('.result')[0];
+                        var result = document.querySelectorAll('#result')[0];
                         result.innerHTML = '';
                         var data = JSON.parse(this.responseText);
                         data.forEach(function (item) {
                             var div = document.createElement('div');
                             div.innerText = item.sign + ' - ' + item.dev_desc;
+                            if(item.dev_desc == '0') {
+                                div.className = 'alarm';
+                            }
                             result.appendChild(div);
                         });
                         console.log(data);

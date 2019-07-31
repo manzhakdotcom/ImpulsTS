@@ -8,8 +8,9 @@
     window.App.search = Search();
 
     window.App.popup.init({
-        button: 'modal-button',
-        content: 'modal-content',
+        button: '#modal-button',
+        title: 'Импульсы ТС',
+        content: 'Импульс 0-есть сигнализация, 1-нет сигнализации.'
     });
 
 

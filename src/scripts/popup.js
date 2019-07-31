@@ -1,7 +1,6 @@
 var Popup = function(){
     var settings = {
-            button: '#modal-trigger-default',
-            content: '#modal-content-default',
+            button: '#modal',
             maxWidth: 600,
             minWidth: 280,
             className: 'fade-and-drop',
@@ -30,7 +29,7 @@ var Popup = function(){
     }
 
     function $(el) {
-        return document.getElementById(el);
+        return document.querySelectorAll(el)[0];
     }
 
     function close() {
@@ -100,15 +99,15 @@ var Popup = function(){
         var div = document.createElement('div');
         div.className = 'modal-wrapper';
         var h4 = document.createElement('h4');
-        h4.innerText = 'Title';
+        h4.innerText = settings.title;
         div.appendChild(h4);
         var p = document.createElement('p');
-        p.innerText = 'Content';
+        p.innerText = settings.content;
         div.appendChild(p);
         var select = document.createElement('select');
         div.appendChild(select);
         var div_result = document.createElement('div');
-        div_result.className = 'result';
+        div_result.id = 'result';
         div.appendChild(div_result);
         frag.appendChild(div);
         return frag;
