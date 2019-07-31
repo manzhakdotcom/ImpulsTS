@@ -87,6 +87,7 @@ var Popup = function(){
 
     function open() {
         buildModel();
+        window.App.search.init();
         handlerModel();
         window.getComputedStyle(modal).height;
         modal.className = modal.className + (modal.offsetHeight > window.innerHeight ? ' scotch-open scotch-anchored' : ' scotch-open');

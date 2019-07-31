@@ -145,6 +145,10 @@
             transition: 500ms top 500ms ease;
 }
 
+.modal-wrapper input {
+  border: 1px solid rgb(169, 169, 169);
+}
+
 .scotch-overlay.fade-and-drop.scotch-open
 {
     top: 0;
