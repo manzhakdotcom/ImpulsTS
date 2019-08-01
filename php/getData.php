@@ -13,7 +13,7 @@ if(is_null($table)) {
     exit();
 }
 
-if($table !== 'kp' || $table !== 'ts') {
+if($table !== 'kp' && $table !== 'ts') {
     echo json_encode(array('error' => 'Скрипт работает только с таблицами ts и kp.'));
     exit();
 }
