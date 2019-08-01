@@ -24,8 +24,8 @@ var Select = function() {
                 option_default.innerText = 'Выберите станцию';
                 select.appendChild(option_default);
                 var data = JSON.parse(this.responseText);
-                if(data.hasOwnProperty('table')) {
-                    alert(data.table);
+                if(data.hasOwnProperty('error')) {
+                    alert(data.error);
                 }
                 data.forEach(function (item) {
                     var option = document.createElement('option');
@@ -40,8 +40,8 @@ var Select = function() {
                         param: e.target.value,
                     }, function(xhr) {
                         var data = JSON.parse(this.responseText);
-                        if(data.hasOwnProperty('table')) {
-                            alert(data.table);
+                        if(data.hasOwnProperty('error')) {
+                            alert(data.error);
                         }
                         var result = document.querySelectorAll('#result')[0];
                         result.innerHTML = '';

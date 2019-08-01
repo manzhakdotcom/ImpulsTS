@@ -9,7 +9,12 @@ $table = (isset($_GET['table']) && trim($_GET['table'] !== '')) ? $_GET['table']
 $param = (isset($_GET['param']) && trim($_GET['param'] !== '')) ? $_GET['param'] : null;
 
 if(is_null($table)) {
-    echo json_encode(array('table' => 'Нужно задать название таблицы БД.'));
+    echo json_encode(array('error' => 'Нужно задать название таблицы БД.'));
+    exit();
+}
+
+if($table !== 'kp' || $table !== 'ts') {
+    echo json_encode(array('error' => 'Скрипт работает только с таблицами ts и kp.'));
     exit();
 }
 
