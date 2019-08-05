@@ -1,7 +1,7 @@
-var Search = function(){
+const Search = function(){
 
     function createInput() {
-        var select = document.querySelectorAll('.modal-wrapper select')[0],
+        let select = document.querySelectorAll('.modal-wrapper select')[0],
             input = document.createElement('input');
         input.id = 'search';
         input.placeholder = 'Поиск импульса...';
@@ -9,8 +9,8 @@ var Search = function(){
 
     }
     function search() {
-        // Declare variables
-        var input, filter, i, txtValue, div;
+        // Declare letiables
+        let input, filter, i, txtValue, div, result;
         input = document.getElementById('search');
         filter = input.value.toUpperCase();
         result = document.getElementById("result");
@@ -29,7 +29,7 @@ var Search = function(){
     }
 
     function listener() {
-        var input = document.getElementById('search');
+        let input = document.getElementById('search');
         input.addEventListener('input', search);
 
     }

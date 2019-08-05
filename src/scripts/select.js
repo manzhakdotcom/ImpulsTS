@@ -1,7 +1,7 @@
-var Select = function() {
+const Select = function() {
 
     function ajax(opts, callback) {
-        var xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
         xhr.open('GET', opts.url + '?table=' + opts.table + '&param=' + opts.param);
         xhr.send(null);
         xhr.onreadystatechange = function () {
@@ -18,35 +18,36 @@ var Select = function() {
                 table: 'kp',
                 param: '',
             }, function (xhr) {
-                var select = document.querySelectorAll('select')[0];
-                var option_default = document.createElement('option');
-                option_default.value = '0';
-                option_default.innerText = 'Выберите станцию';
-                select.appendChild(option_default);
-                var data = JSON.parse(this.responseText);
+                let data = JSON.parse(this.responseText);
                 if(data.hasOwnProperty('error')) {
                     alert(data.error);
                 }
+                let select = document.querySelectorAll('select')[0];
+                select.disabled = false;
+                select.options[0].text = 'Выберите станцию';
                 data.forEach(function (item) {
-                    var option = document.createElement('option');
+                    let option = document.createElement('option');
                     option.value = item.id;
                     option.innerText = item.sign;
                     select.appendChild(option);
                 });
                 select.addEventListener('change', function(e) {
+                    let result = document.querySelectorAll('#result')[0];
+                    result.innerHTML = 'Загрузка импульсов...';
+                    document.getElementById('search').value = '';
                     ajax({
                         url: 'php/getData.php',
                         table: 'ts',
                         param: e.target.value,
                     }, function(xhr) {
-                        var data = JSON.parse(this.responseText);
+                        let data = JSON.parse(this.responseText);
                         if(data.hasOwnProperty('error')) {
                             alert(data.error);
                         }
-                        var result = document.querySelectorAll('#result')[0];
+                        let result = document.querySelectorAll('#result')[0];
                         result.innerHTML = '';
                         data.forEach(function (item) {
-                            var div = document.createElement('div');
+                            let div = document.createElement('div');
                             div.innerText = item.sign + ' - ' + item.dev_desc;
                             if(item.dev_desc == '0') {
                                 div.className = 'alarm';

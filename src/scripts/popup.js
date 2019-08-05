@@ -1,5 +1,5 @@
-var Popup = function(){
-    var settings = {
+const Popup = function(){
+    let settings = {
             button: '#modal',
             maxWidth: 600,
             minWidth: 280,
@@ -11,15 +11,15 @@ var Popup = function(){
         transitionEnd = transitionSelect();
 
     function transitionSelect() {
-        var el = document.createElement("div");
+        let el = document.createElement("div");
         if (el.style.WebkitTransition) return "webkitTransitionEnd";
         if (el.style.OTransition) return "oTransitionEnd";
         return 'transitionend';
     }
 
     function extend() {
-        for (var i = 1; i < arguments.length; i++) {
-            for (var key in arguments[i]) {
+        for (let i = 1; i < arguments.length; i++) {
+            for (let key in arguments[i]) {
                 if (arguments[i].hasOwnProperty(key)) {
                     arguments[0][key] = arguments[i][key]
                 }
@@ -49,13 +49,13 @@ var Popup = function(){
     }
 
     function handlerButton(){
-        var button = $(settings.button);
+        let button = $(settings.button);
         button.addEventListener('click', open);
 
     }
 
     function buildModel() {
-        var contentHolder,
+        let contentHolder,
             docFrag;
         
         docFrag = document.createDocumentFragment();
@@ -95,18 +95,23 @@ var Popup = function(){
     }
 
     function createModal() {
-        var frag = document.createDocumentFragment();
-        var div = document.createElement('div');
+        let frag = document.createDocumentFragment();
+        let div = document.createElement('div');
         div.className = 'modal-wrapper';
-        var h4 = document.createElement('h4');
+        let h4 = document.createElement('h4');
         h4.innerText = settings.title;
         div.appendChild(h4);
-        var p = document.createElement('p');
+        let p = document.createElement('p');
         p.innerText = settings.content;
         div.appendChild(p);
-        var select = document.createElement('select');
+        let select = document.createElement('select');
+        select.disabled = true;
+        let option_default = document.createElement('option');
+        option_default.innerText = 'Загрузка станций...';
+        option_default.value = '0';
+        select.appendChild(option_default);
         div.appendChild(select);
-        var div_result = document.createElement('div');
+        let div_result = document.createElement('div');
         div_result.id = 'result';
         div.appendChild(div_result);
         frag.appendChild(div);

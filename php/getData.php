@@ -1,4 +1,5 @@
 <?php
+sleep(5);
 header('Content-Type:application/json;charset=UTF-8');
 
 $config = require __DIR__ . '/config.php';
