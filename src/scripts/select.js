@@ -52,6 +52,9 @@ const Select = function() {
                             if(item.dev_desc == '0') {
                                 div.className = 'alarm';
                             }
+                            if(item.title !== null) {
+                                div.setAttribute('title', item.title);
+                            }
                             result.appendChild(div);
                         });
                     });
