@@ -27,9 +27,9 @@ const Select = function() {
         
         for(let i=0;i<length; i++){
             if(mnemo.includes(new_data[i].mnemo_id)) {
-                new_data[i].place = 'УЧ';
+                new_data[i].place = 'Участок';
             } else {
-                new_data[i].place = 'СТ';
+                new_data[i].place = 'Станция';
             }
         }
         console.log(data);
@@ -75,8 +75,9 @@ const Select = function() {
                         result.innerHTML = '';
                         data.forEach(function (item) {
                             let div = document.createElement('div');
-                            div.innerHTML = item.sign + ' - ' + item.dev_desc + ' ' + item.place;
-                            div.innerHTML += `<span class="info">&angrt; id: ${item.val_id}, ip: ${item.interface}, id_shem: ${item.id_shem}, id_mnemo: ${item.mnemo_id}</span>`;
+                            let sign = item.dev_desc == '1'?'Нет':'Есть';
+                            div.innerHTML = item.sign + ' - ' + sign;
+                            div.innerHTML += `<span class="info">&angrt; id: ${item.val_id}, ip: ${item.interface}, id_shem: ${item.id_shem}, id_mnemo: ${item.mnemo_id}, signal: ${item.dev_desc}, ${item.place}</span>`;
                             if(item.dev_desc == '0') {
                                 div.className ='alarm';
                             }
