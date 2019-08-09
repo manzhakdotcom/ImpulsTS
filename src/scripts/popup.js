@@ -1,7 +1,7 @@
 const Popup = function(){
     let settings = {
             button: '#modal',
-            maxWidth: 600,
+            maxWidth: 850,
             minWidth: 280,
             className: 'fade-and-drop',
         },
@@ -102,7 +102,7 @@ const Popup = function(){
         h4.innerText = settings.title;
         div.appendChild(h4);
         let p = document.createElement('p');
-        p.innerText = settings.content;
+        p.innerHTML = settings.content;
         div.appendChild(p);
         let select = document.createElement('select');
         select.disabled = true;

@@ -1,4 +1,13 @@
 const Select = function() {
+    const mnemo = [
+        '20000',
+        '10000',
+        '10001',
+        '40001',
+        '40002',
+        '90000',
+        '90001',
+    ];
 
     function ajax(opts, callback) {
         let xhr = new XMLHttpRequest();
@@ -9,6 +18,23 @@ const Select = function() {
                 callback.apply(xhr);
             }
         };
+    }
+
+    function setMnemoText(data){
+        let new_data = JSON.parse(JSON.stringify(data));
+        let length = new_data.length;
+        console.log(length);
+        
+        for(let i=0;i<length; i++){
+            if(mnemo.includes(new_data[i].mnemo_id)) {
+                new_data[i].place = 'УЧ';
+            } else {
+                new_data[i].place = 'СТ';
+            }
+        }
+        console.log(data);
+        console.log(new_data);
+        return new_data;
     }
 
     return {
@@ -44,13 +70,15 @@ const Select = function() {
                         if(data.hasOwnProperty('error')) {
                             alert(data.error);
                         }
+                        data = setMnemoText(data);
                         let result = document.querySelectorAll('#result')[0];
                         result.innerHTML = '';
                         data.forEach(function (item) {
                             let div = document.createElement('div');
-                            div.innerText = item.sign + ' - ' + item.dev_desc;
+                            div.innerHTML = item.sign + ' - ' + item.dev_desc + ' ' + item.place;
+                            div.innerHTML += `<span class="info">&angrt; id: ${item.val_id}, ip: ${item.interface}</span>`;
                             if(item.dev_desc == '0') {
-                                div.className = 'alarm';
+                                div.className ='alarm';
                             }
                             if(item.title !== null) {
                                 div.setAttribute('title', item.title);
