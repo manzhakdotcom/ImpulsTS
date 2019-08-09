@@ -76,7 +76,7 @@ const Select = function() {
                         data.forEach(function (item) {
                             let div = document.createElement('div');
                             div.innerHTML = item.sign + ' - ' + item.dev_desc + ' ' + item.place;
-                            div.innerHTML += `<span class="info">&angrt; id: ${item.val_id}, ip: ${item.interface}, id_shem:${item.id_shem}</span>`;
+                            div.innerHTML += `<span class="info">&angrt; id: ${item.val_id}, ip: ${item.interface}, id_shem: ${item.id_shem}, id_mnemo: ${item.mnemo_id}</span>`;
                             if(item.dev_desc == '0') {
                                 div.className ='alarm';
                             }
