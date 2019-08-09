@@ -22,7 +22,7 @@ if($table !== 'kp' && $table !== 'ts') {
 if (is_null($param)) {
     $sth = $pdo->prepare('select id, sign from ' . $table . ' where typertu_id > 0');
 } else {
-    $sth = $pdo->prepare('select ' . $table . '.sign, ' . $table . '.dev_desc, d.val_id, d.sign as title, d.mnemo_id, kp.interface from ' . $table . ' left join dshem as d on ' . $table . '.id=d.val_id left join kp on ts.kp_id=kp.id where ' . $table . '.kp_id = ' . $param . ' and d.mnemo_id is not null order by ' . $table . '.dev_desc, trim(' . $table . '.sign)');
+    $sth = $pdo->prepare('select ' . $table . '.sign, ' . $table . '.dev_desc, d.val_id, d.sign as title, d.mnemo_id, kp.interface, d.id_shem from ' . $table . ' left join dshem as d on ' . $table . '.id=d.val_id left join kp on ts.kp_id=kp.id where ' . $table . '.kp_id = ' . $param . ' and d.mnemo_id is not null order by ' . $table . '.dev_desc, trim(' . $table . '.sign)');
 }
 
 $sth->execute();
