@@ -69,7 +69,7 @@ const Select = function() {
         result.innerHTML = '';
         data.forEach(function (item) {
             let div = document.createElement('div');
-            let sign = item.dev_desc == '1'?'Нет':'Есть';
+            let sign = item.dev_desc == '1'?'Нет':'Да';
             div.innerHTML = item.sign + ' - ' + sign;
             div.innerHTML += `<span class="info" style="display: ${checked()};">&angrt; id: ${item.val_id}, ip: ${item.interface}, id_shem: ${item.id_shem}, id_mnemo: ${item.mnemo_id}, signal: ${item.dev_desc}, ${item.place}</span>`;
             if(item.dev_desc == '0') {
