@@ -117,7 +117,7 @@ const Popup = function(){
         let div_result = document.createElement('div');
         div_result.id = 'result';
         div.appendChild(div_result);
-        let checkbox = document.createRange().createContextualFragment('<div class="check"><input type="checkbox" name="extend">Расширенный вид</div>');
+        let checkbox = document.createRange().createContextualFragment('<div class="check"><label class="container">Расширенный вид<input type="checkbox" name="extend" id="extend"><span class="checkmark"></span></label></div>');
         div.appendChild(checkbox);
         frag.appendChild(div);
         return frag;
