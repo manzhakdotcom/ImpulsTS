@@ -37,6 +37,32 @@ const Select = function() {
         return new_data;
     }
 
+    function handlerCheck(){
+        let check = document.querySelectorAll('input[name=extend]')[0];
+        let info = document.getElementsByClassName('info');
+        console.log(check);
+        check.addEventListener('change', function() {
+            if(this.checked) {
+                for (let item of info) {
+                    item.style.display = 'block';
+                }
+            } else {
+                for (let item of info) {
+                    item.style.display = 'none';
+                }
+            }
+        });
+    }
+
+    function checked() {
+        let el = document.querySelector('input[name=extend]');
+        if (el.checked) {
+            return 'block';
+        } else {
+            return 'none';
+        }
+    }
+
     return {
         createElement: function() {
             ajax({
@@ -77,7 +103,7 @@ const Select = function() {
                             let div = document.createElement('div');
                             let sign = item.dev_desc == '1'?'Нет':'Есть';
                             div.innerHTML = item.sign + ' - ' + sign;
-                            div.innerHTML += `<span class="info">&angrt; id: ${item.val_id}, ip: ${item.interface}, id_shem: ${item.id_shem}, id_mnemo: ${item.mnemo_id}, signal: ${item.dev_desc}, ${item.place}</span>`;
+                            div.innerHTML += `<span class="info" style="display: ${checked()};">&angrt; id: ${item.val_id}, ip: ${item.interface}, id_shem: ${item.id_shem}, id_mnemo: ${item.mnemo_id}, signal: ${item.dev_desc}, ${item.place}</span>`;
                             if(item.dev_desc == '0') {
                                 div.className ='alarm';
                             }
@@ -86,6 +112,7 @@ const Select = function() {
                             }
                             result.appendChild(div);
                         });
+                        handlerCheck();
                     });
                 });
             });

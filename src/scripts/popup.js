@@ -48,6 +48,8 @@ const Popup = function(){
         overlay.addEventListener('click', close);
     }
 
+
+
     function handlerButton(){
         let button = $(settings.button);
         button.addEventListener('click', open);
@@ -88,6 +90,7 @@ const Popup = function(){
         buildModel();
         window.App.search.init();
         handlerModel();
+
         window.getComputedStyle(modal).height;
         modal.className = modal.className + (modal.offsetHeight > window.innerHeight ? ' scotch-open scotch-anchored' : ' scotch-open');
         overlay.className = overlay.className + ' scotch-open';
@@ -114,6 +117,8 @@ const Popup = function(){
         let div_result = document.createElement('div');
         div_result.id = 'result';
         div.appendChild(div_result);
+        let checkbox = document.createRange().createContextualFragment('<div class="check"><input type="checkbox" name="extend">Расширенный вид</div>');
+        div.appendChild(checkbox);
         frag.appendChild(div);
         return frag;
 
