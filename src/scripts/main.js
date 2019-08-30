@@ -9,7 +9,7 @@ window.App.search = Search();
 window.App.popup.init({
     button: '#modal-button',
     title: 'Импульсы ТС',
-    content: '<b>0</b>-есть сигнализация, <b>1</b>-нет сигнализации.<br/><b>СТ</b>-станционный план, <b>УЧ</b>-участковый план.'
+    content: '<b>Да</b> - есть сигнализация, <b>Нет</b> - нет сигнализации.'
 });
 
 

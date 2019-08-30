@@ -20,7 +20,9 @@ const Search = function(){
         for (i = 0; i < div.length; i++) {
             //a = div[i].getElementsByTagName("a")[0];
             txtValue = div[i].textContent || div[i].innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            txtValue = txtValue.split('∟');
+
+            if (txtValue[0].toUpperCase().indexOf(filter) > -1) {
                 div[i].style.display = "";
             } else {
                 div[i].style.display = "none";
