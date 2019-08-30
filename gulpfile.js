@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const pug = require('gulp-pug');
+const babel = require('gulp-babel');
 const postcss = require('gulp-postcss');
 const sourcemaps = require('gulp-sourcemaps');
 const rename = require('gulp-rename');
@@ -21,7 +22,7 @@ const paths = {
         dest: './dist/css',
     },
     scripts: {
-        src: ['./src/scripts/popup.js', './src/scripts/ajax.js', './src/scripts/main.js'],
+        src: ['./src/scripts/search.js', './src/scripts/popup.js', './src/scripts/select.js', './src/scripts/main.js'],
         dest: './dist/js',
     }
 };
@@ -62,6 +63,9 @@ function styles() {
 function scripts() {
     return gulp.src(paths.scripts.src)
             .pipe(concat('main.min.js'))
+            .pipe(babel({
+                presets: ['@babel/env']
+            }))
             .pipe(uglify())
             .pipe(gulp.dest(paths.scripts.dest));
 }
