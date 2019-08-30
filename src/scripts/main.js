@@ -1,5 +1,9 @@
 'use strict';
+import {sayHi} from './exp.js';
 
+sayHi();
+
+/*
 window.App = {};
 
 window.App.popup = Popup();
@@ -12,7 +16,7 @@ window.App.popup.init({
     content: '<b>Да</b> - есть сигнализация, <b>Нет</b> - нет сигнализации.'
 });
 
-
+*/
 
 
 
