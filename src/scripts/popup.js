@@ -26,8 +26,10 @@ class Popup {
     close() {
         this.modal.className = this.modal.className.replace(" scotch-open", "");
         this.overlay.className = this.overlay.className.replace(" scotch-open", "");
-        this.modal.parentNode.removeChild(this.modal);
-        if (this.overlay.parentNode) this.overlay.parentNode.removeChild(this.overlay);
+        this.modal.addEventListener('transitionend', e => this.modal.parentNode.removeChild(this.modal), false);
+        this.overlay.addEventListener('transitionend', e => {
+            if (this.overlay.parentNode) this.overlay.parentNode.removeChild(this.overlay)}
+            , false );
     }
 
     handlerModel() {
