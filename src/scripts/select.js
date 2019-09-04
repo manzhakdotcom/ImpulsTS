@@ -37,14 +37,13 @@ class Select {
 
     setMnemoText(data){
         let new_data = JSON.parse(JSON.stringify(data));
-        let length = new_data.length;
-        for(let i=0;i<length; i++){
-            if(this.mnemo.includes(new_data[i].mnemo_id)) {
-                new_data[i].place = 'Участок';
+        new_data.forEach(item => {
+            if(this.mnemo.includes(item.mnemo_id)) {
+                item.place = 'Участок';
             } else {
-                new_data[i].place = 'Станция';
+                item.place = 'Станция';
             }
-        }
+        });
         console.log(new_data);
         return new_data;
     }
