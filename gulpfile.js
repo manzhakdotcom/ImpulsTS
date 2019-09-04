@@ -68,10 +68,10 @@ function styles() {
 function scripts() {
     return gulp.src(paths.scripts.src)
             .pipe(concat('main.min.js'))
-            //.pipe(babel({
-            //    presets: ['@babel/env']
-            //}))
-            //.pipe(uglify())
+            .pipe(babel({
+                presets: ['@babel/env']
+            }))
+            .pipe(uglify())
             .pipe(gulp.dest(paths.scripts.dest));
 }
 
