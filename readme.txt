@@ -1,1 +1,0 @@
-Course of JS by Pr-Of-It.ru
