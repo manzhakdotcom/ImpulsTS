@@ -22,7 +22,12 @@ const paths = {
         dest: './dist/css',
     },
     scripts: {
-        src: ['./src/scripts/search.js', './src/scripts/popup.js', './src/scripts/select.js', './src/scripts/main.js'],
+        src: [
+            './src/scripts/search.js',
+            './src/scripts/popup.js', 
+            './src/scripts/select.js',
+            './src/scripts/main.js',
+        ],
         dest: './dist/js',
     }
 };
@@ -63,10 +68,10 @@ function styles() {
 function scripts() {
     return gulp.src(paths.scripts.src)
             .pipe(concat('main.min.js'))
-            .pipe(babel({
-                presets: ['@babel/env']
-            }))
-            .pipe(uglify())
+            //.pipe(babel({
+            //    presets: ['@babel/env']
+            //}))
+            //.pipe(uglify())
             .pipe(gulp.dest(paths.scripts.dest));
 }
 

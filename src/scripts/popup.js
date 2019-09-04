@@ -1,23 +1,14 @@
-const Popup = function(){
-    let settings = {
+class Popup {
+    constructor() {
+        this.settings = {
             button: '#modal',
             maxWidth: 850,
             minWidth: 280,
             className: 'fade-and-drop',
-        },
-        modal,
-        closeButton,
-        overlay,
-        transitionEnd = transitionSelect();
-
-    function transitionSelect() {
-        let el = document.createElement("div");
-        if (el.style.WebkitTransition) return "webkitTransitionEnd";
-        if (el.style.OTransition) return "oTransitionEnd";
-        return 'transitionend';
+        };
     }
 
-    function extend() {
+    static extend() {
         for (let i = 1; i < arguments.length; i++) {
             for (let key in arguments[i]) {
                 if (arguments[i].hasOwnProperty(key)) {
@@ -28,84 +19,71 @@ const Popup = function(){
         return arguments[0]
     }
 
-    function $(el) {
+    static $(el) {
         return document.querySelectorAll(el)[0];
     }
 
-    function close() {
-        modal.className = modal.className.replace(" scotch-open", "");
-        overlay.className = overlay.className.replace(" scotch-open", "");
-        modal.addEventListener(transitionEnd, function() {
-            modal.parentNode.removeChild(modal);
-        });
-        overlay.addEventListener(transitionEnd, function() {
-            if(overlay.parentNode) overlay.parentNode.removeChild(overlay);
-        });
+    close() {
+        this.modal.className = this.modal.className.replace(" scotch-open", "");
+        this.overlay.className = this.overlay.className.replace(" scotch-open", "");
+        this.modal.addEventListener('transitionend', e => this.modal.parentNode.removeChild(this.modal), false);
+        this.overlay.addEventListener('transitionend', e => {
+            if (this.overlay.parentNode) this.overlay.parentNode.removeChild(this.overlay)}
+            , false );
     }
 
-    function handlerModel(){
-        closeButton.addEventListener('click', close);
-        overlay.addEventListener('click', close);
+    handlerModel() {
+        this.closeButton.addEventListener('click', e => this.close(), false);
+        this.overlay.addEventListener('click', e => this.close(), false);
     }
 
-
-
-    function handlerButton(){
-        let button = $(settings.button);
-        button.addEventListener('click', open);
-
+    handlerButton() {
+        let button = Popup.$(this.settings.button);
+        button.addEventListener('click', e => this.open(), false);
     }
 
-    function buildModel() {
+    buildModel() {
         let contentHolder,
             docFrag;
-        
         docFrag = document.createDocumentFragment();
-        
-        modal = document.createElement('div');
-        modal.className = 'scotch-modal ' + settings.className;
-        modal.style.minWidth = settings.minWidth + 'px';
-        modal.style.maxWidth = settings.maxWidth + 'px';
-
-        closeButton = document.createElement('button');
-        closeButton.className = 'scotch-close close-button';
-        closeButton.innerHTML = '&times;';
-        modal.appendChild(closeButton);
-
-        overlay = document.createElement("div");
-        overlay.className = "scotch-overlay " + settings.className;
-        docFrag.appendChild(overlay);
-
+        this.modal = document.createElement('div');
+        this.closeButton = document.createElement('button');
+        this.overlay = document.createElement("div");
+        this.modal.className = 'scotch-modal ' + this.settings.className;
+        this.modal.style.minWidth = this.settings.minWidth + 'px';
+        this.modal.style.maxWidth = this.settings.maxWidth + 'px';
+        this.closeButton.className = 'scotch-close close-button';
+        this.closeButton.innerHTML = '&times;';
+        this.modal.appendChild(this.closeButton);
+        this.overlay.className = "scotch-overlay " + this.settings.className;
+        docFrag.appendChild(this.overlay);
         contentHolder = document.createElement("div");
         contentHolder.className = "scotch-content";
-        contentHolder.appendChild(createModal());
-        modal.appendChild(contentHolder);
-
-        docFrag.appendChild(modal);
-
+        contentHolder.appendChild(this.createModal());
+        this.modal.appendChild(contentHolder);
+        docFrag.appendChild(this.modal);
         document.body.appendChild(docFrag);
     }
 
-    function open() {
-        buildModel();
+    open() {
+        this.buildModel();
         window.App.search.init();
-        handlerModel();
-
-        window.getComputedStyle(modal).height;
-        modal.className = modal.className + (modal.offsetHeight > window.innerHeight ? ' scotch-open scotch-anchored' : ' scotch-open');
-        overlay.className = overlay.className + ' scotch-open';
+        this.handlerModel();
+        window.getComputedStyle(this.modal).height;
+        this.modal.className = this.modal.className + (this.modal.offsetHeight > window.innerHeight ? ' scotch-open scotch-anchored' : ' scotch-open');
+        this.overlay.className = this.overlay.className + ' scotch-open';
         window.App.select.createElement();
     }
 
-    function createModal() {
+    createModal() {
         let frag = document.createDocumentFragment();
         let div = document.createElement('div');
         div.className = 'modal-wrapper';
         let h4 = document.createElement('h4');
-        h4.innerText = settings.title;
+        h4.innerText = this.settings.title;
         div.appendChild(h4);
         let p = document.createElement('p');
-        p.innerHTML = settings.content;
+        p.innerHTML = this.settings.content;
         div.appendChild(p);
         let select = document.createElement('select');
         select.disabled = true;
@@ -121,15 +99,10 @@ const Popup = function(){
         div.appendChild(checkbox);
         frag.appendChild(div);
         return frag;
-
     }
 
-    return {
-        init: function(opt){
-            settings = extend({}, settings, opt);
-            handlerButton();
-
-        }
-    };
-
-};
+    init(opt) {
+        this.settings = Popup.extend({}, this.settings, opt);
+        this.handlerButton();
+    }
+}
