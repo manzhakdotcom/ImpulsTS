@@ -99,7 +99,6 @@ class Popup {
         div.appendChild(checkbox);
         frag.appendChild(div);
         return frag;
-
     }
 
     init(opt) {

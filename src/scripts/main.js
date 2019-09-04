@@ -2,8 +2,8 @@
 
 window.App = {};
 
-window.App.select = Select();
-window.App.search = Search();
+window.App.select = new Select();
+window.App.search = new Search();
 
 new Popup().init({
     button: '#modal-button',

@@ -1,6 +1,8 @@
-const Search = function(){
+class Search {
 
-    function createInput() {
+    constructor() {}
+
+    createInput() {
         let select = document.querySelectorAll('.modal-wrapper select')[0],
             input = document.createElement('input');
         input.id = 'search';
@@ -8,7 +10,8 @@ const Search = function(){
         select.insertAdjacentHTML('afterEnd', input.outerHTML);
 
     }
-    function search() {
+
+    search() {
         // Declare letiables
         let input, filter, i, txtValue, div, result;
         input = document.getElementById('search');
@@ -30,16 +33,14 @@ const Search = function(){
         }
     }
 
-    function listener() {
+    listener() {
         let input = document.getElementById('search');
-        input.addEventListener('input', search);
+        input.addEventListener('input', e => this.search());
 
     }
 
-    return {
-        init: function () {
-            createInput();
-            listener();
-        },
-    };
-};
+    init() {
+        this.createInput();
+        this.listener();
+    }
+}
