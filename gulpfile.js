@@ -45,7 +45,6 @@ function server() {
     browserSync.watch(paths.root + '/**/*.*', browserSync.reload);
 }
 
-
 function clean() {
     return del(paths.root);
 }

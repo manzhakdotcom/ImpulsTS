@@ -13,16 +13,15 @@ class Search {
 
     search() {
         // Declare letiables
-        let input, filter, i, txtValue, div, result;
-        input = document.getElementById('search');
-        filter = input.value.toUpperCase();
-        result = document.getElementById("result");
-        div = result.getElementsByTagName('div');
+        let input = document.getElementById('search'),
+            filter = input.value.toUpperCase(),
+            div = result.getElementsByTagName('div'),
+            result = document.getElementById("result");
 
         // Loop through all list items, and hide those who don't match the search query
-        for (i = 0; i < div.length; i++) {
+        for (let i = 0; i < div.length; i++) {
             //a = div[i].getElementsByTagName("a")[0];
-            txtValue = div[i].textContent || div[i].innerText;
+            let txtValue = div[i].textContent || div[i].innerText;
             txtValue = txtValue.split('∟');
 
             if (txtValue[0].toUpperCase().indexOf(filter) > -1) {

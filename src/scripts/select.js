@@ -13,11 +13,11 @@ class Select {
     }
 
     ajax(opts) {
-        return new Promise( (resolve, reject) => {
+        return new Promise((resolve, reject) => {
             var xhr = new XMLHttpRequest();
             xhr.open('GET', opts.url + '?table=' + opts.table + '&param=' + opts.param, true);
 
-            xhr.onload = function() {
+            xhr.onload = function () {
                 if (this.status == 200) {
                     resolve(this.responseText);
                 } else {
@@ -27,18 +27,18 @@ class Select {
                 }
             };
 
-            xhr.onerror = function() {
+            xhr.onerror = function () {
                 reject(new Error("Network Error"));
             };
 
-            xhr.send();
-        } );
+            xhr.send(null);
+        });
     }
 
-    setMnemoText(data){
+    setMnemoText(data) {
         let new_data = JSON.parse(JSON.stringify(data));
         new_data.forEach(item => {
-            if(this.mnemo.includes(item.mnemo_id)) {
+            if (this.mnemo.includes(item.mnemo_id)) {
                 item.place = 'Участок';
             } else {
                 item.place = 'Станция';
@@ -48,11 +48,11 @@ class Select {
         return new_data;
     }
 
-    handlerCheck(){
+    handlerCheck() {
         let check = document.querySelectorAll('input[name=extend]')[0];
         let info = document.getElementsByClassName('info');
-        check.addEventListener('change', function() {
-            if(this.checked) {
+        check.addEventListener('change', function () {
+            if (this.checked) {
                 for (let item of info) {
                     item.style.display = 'block';
                 }
@@ -75,7 +75,7 @@ class Select {
 
     showData(response) {
         let data = JSON.parse(response);
-        if(data.hasOwnProperty('error')) {
+        if (data.hasOwnProperty('error')) {
             alert(data.error);
         }
         data = this.setMnemoText(data);
@@ -83,13 +83,13 @@ class Select {
         result.innerHTML = '';
         data.forEach(function (item) {
             let div = document.createElement('div');
-            let sign = item.dev_desc == '1'?'Нет':'Да';
+            let sign = item.dev_desc == '1' ? 'Нет' : 'Да';
             div.innerHTML = item.sign + ' - ' + sign;
             div.innerHTML += `<span class="info" style="display: ${Select.checked()};">&angrt; id: ${item.val_id}, ip: ${item.interface}, id_shem: ${item.id_shem}, id_mnemo: ${item.mnemo_id}, signal: ${item.dev_desc}, ${item.place}</span>`;
-            if(item.dev_desc == '0') {
-                div.className ='alarm';
+            if (item.dev_desc == '0') {
+                div.className = 'alarm';
             }
-            if(item.title !== null) {
+            if (item.title !== null) {
                 div.setAttribute('title', item.title);
             }
             result.appendChild(div);
@@ -112,7 +112,7 @@ class Select {
         );
     }
 
-    getStations (opts) {
+    getStations(opts) {
         let stations = this.ajax(opts);
         stations.then(
             response => this.createSelect(response),
@@ -122,7 +122,7 @@ class Select {
 
     createSelect(response) {
         let data = JSON.parse(response);
-        if(data.hasOwnProperty('error')) {
+        if (data.hasOwnProperty('error')) {
             alert(data.error);
         }
         let select = document.querySelectorAll('select')[0];
@@ -143,7 +143,5 @@ class Select {
             table: 'kp',
             param: '',
         });
-
-
     }
 }
